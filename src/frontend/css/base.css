@@ -1,0 +1,271 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font:
+        13.5px/1.5 -apple-system,
+        BlinkMacSystemFont,
+        "Inter",
+        "Segoe UI",
+        Roboto,
+        sans-serif;
+    background: var(--bg);
+    color: var(--tx);
+    -webkit-font-smoothing: antialiased;
+}
+
+.hidden {
+    display: none !important;
+}
+
+[data-scope="contacts"] .hide-contacts,
+[data-scope="apps"] .hide-apps,
+[data-scope="opps"] .hide-opps {
+    display: none !important;
+}
+
+.mut {
+    color: var(--mut);
+}
+
+.sm {
+    font-size: 12px;
+}
+
+a {
+    color: var(--ac);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+input,
+select,
+textarea,
+button {
+    font: inherit;
+    color: var(--tx);
+    background: var(--card);
+    border: 1px solid var(--bd);
+    border-radius: 6px;
+    padding: 6px 10px;
+    transition:
+        border-color 0.15s,
+        box-shadow 0.15s,
+        background 0.15s;
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: var(--mut);
+    opacity: 0.65;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: var(--ac);
+    box-shadow: 0 0 0 3px var(--acs);
+}
+
+textarea {
+    width: 100%;
+    resize: vertical;
+    line-height: 1.5;
+}
+
+button {
+    cursor: pointer;
+    font-weight: 500;
+}
+
+button:hover {
+    border-color: var(--bd-strong);
+}
+
+button:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+button.pri {
+    background: var(--ac);
+    border-color: var(--ac);
+    color: #fff;
+}
+
+button.pri:hover {
+    background: var(--ac-hov);
+    border-color: var(--ac-hov);
+}
+
+button.danger {
+    color: var(--red);
+    border-color: transparent;
+    background: transparent;
+}
+
+button.danger:hover {
+    background: var(--red-bg);
+    border-color: var(--red-bg);
+}
+
+button.link {
+    border: 0;
+    background: none;
+    color: var(--ac);
+    padding: 2px 6px;
+    font-size: 12px;
+}
+
+button.link:hover {
+    background: var(--acs);
+}
+
+.x {
+    border: 0;
+    background: none;
+    color: var(--mut);
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
+.x:hover {
+    color: var(--tx);
+    background: var(--col-bg);
+}
+
+.r {
+    float: right;
+}
+
+.hov {
+    opacity: 0;
+    transition: opacity 0.12s;
+}
+
+@media (hover: none) {
+    .hov {
+        opacity: 1;
+    }
+}
+
+kbd {
+    font:
+        11px ui-monospace,
+        SFMono-Regular,
+        Menlo,
+        monospace;
+    background: rgba(255, 255, 255, 0.18);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+    padding: 0 5px;
+    margin-left: 4px;
+}
+
+.badge {
+    font-size: 11px;
+    border: 1px solid var(--bd);
+    border-radius: 5px;
+    padding: 1px 6px;
+    color: var(--mut);
+    font-weight: 500;
+    background: var(--card);
+}
+
+.badge.soon {
+    color: var(--ac);
+    background: var(--acs);
+    border-color: transparent;
+}
+
+.badge.late {
+    color: var(--red);
+    background: var(--red-bg);
+    border-color: transparent;
+}
+
+.dup-alert {
+    background: var(--org-bg);
+    border: 1px solid var(--org);
+    color: var(--org);
+    padding: 8px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    line-height: 1.4;
+    margin-top: 8px;
+}
+
+.dup-alert.strict {
+    background: var(--red-bg);
+    border-color: var(--red);
+    color: var(--red);
+}
+
+.dup-alert button {
+    margin-left: 6px;
+    padding: 2px 7px;
+    font-size: 11px;
+    border-radius: 4px;
+    background: var(--card);
+    color: var(--tx);
+    border: 1px solid var(--bd-strong);
+}
+
+.dup-badge {
+    display: inline-block;
+    margin-top: 5px;
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 500;
+    background: var(--org-bg);
+    color: var(--org);
+    border: 1px solid rgba(217, 119, 6, 0.3);
+}
+
+.svg-ico {
+    width: 13px;
+    height: 13px;
+    vertical-align: -2px;
+    margin-right: 4px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    flex-shrink: 0;
+}
+
+.dot {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    margin-right: 4px;
+}
+
+.dot.big {
+    width: 10px;
+    height: 10px;
+    margin: 5px 0 0;
+    flex: none;
+}
+
+.btn-subtle {
+    background: var(--acs);
+    color: var(--ac);
+    border-color: transparent;
+    padding: 4px 10px;
+    font-size: 12px;
+    border-radius: 6px;
+}
+
+.btn-subtle:hover {
+    border-color: var(--ac);
+}

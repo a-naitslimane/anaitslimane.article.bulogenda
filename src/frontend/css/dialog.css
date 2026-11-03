@@ -1,0 +1,77 @@
+dialog.dlg {
+    border: 1px solid var(--bd);
+    border-radius: 12px;
+    background: var(--card);
+    color: var(--tx);
+    width: min(540px, 94vw);
+    max-height: 92vh;
+    overflow: hidden;
+    padding: 0;
+    box-shadow: var(--shadow-md);
+}
+
+dialog.dlg::backdrop {
+    background: rgba(15, 23, 42, 0.45);
+    backdrop-filter: blur(2px);
+}
+
+dialog.dlg form {
+    display: flex;
+    flex-direction: column;
+    max-height: 92vh;
+}
+
+.dlg-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--bd);
+    background: var(--card);
+}
+
+.dlg-head h3 {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+}
+
+.dlg-body {
+    padding: 18px 20px;
+    overflow-y: auto;
+    background: var(--subtle);
+}
+
+.dlg-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px 14px;
+}
+
+.dlg-grid label {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 11.5px;
+    font-weight: 500;
+    color: var(--mut);
+}
+
+.dlg-grid input,
+.dlg-grid select,
+.dlg-grid textarea {
+    color: var(--tx);
+    background: var(--card);
+    font-size: 13px;
+    font-weight: 400;
+}
+
+.dlg-foot {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    padding: 12px 20px;
+    border-top: 1px solid var(--bd);
+    background: var(--card);
+}

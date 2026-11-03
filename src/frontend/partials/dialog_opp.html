@@ -1,0 +1,51 @@
+<dialog id="dlg-opp" class="dlg">
+    <form id="form-opp" method="dialog">
+        <div class="dlg-head">
+            <h3 data-i18n="dlg.opps.h">Nouvelle opportunité</h3>
+            <button type="button" class="x" data-dlg-close title="Fermer (Échap)">✕</button>
+        </div>
+        <div class="dlg-body">
+            <div class="dlg-grid">
+                <label>
+                    <span data-i18n="dlg.opps.la">Société</span>
+                    <input id="no-company" required>
+                </label>
+                <label>
+                    <span data-i18n="drawer.opp_pos">Poste / Mission</span>
+                    <input id="no-position" data-i18n-ph="drawer.opp_pos_ph"
+                        placeholder="Intitulé (optionnel si spontanée)">
+                </label>
+                <label>
+                    <span data-i18n="drawer.source">Origine</span>
+                    <select id="no-source"></select>
+                </label>
+                <label>
+                    <span data-i18n="dlg.contract">Type de contrat</span>
+                    <select id="no-contract"></select>
+                </label>
+                <label>
+                    <span data-i18n="dlg.sent_at">Date et heure d'envoi</span>
+                    <input type="datetime-local" id="no-sent">
+                </label>
+                <label>
+                    <span data-i18n="dlg.init_stage">Étape initiale</span>
+                    <select id="no-stage"></select>
+                </label>
+                <label class="full">
+                    <span data-i18n="drawer.offer_link">Lien (Annonce, Site, LinkedIn)</span>
+                    <input id="no-link" placeholder="https://…">
+                </label>
+                <label class="full">
+                    <span data-i18n="dlg.desc_opt">Descriptif (optionnel)</span>
+                    <textarea id="no-desc" rows="3" data-i18n-ph="drawer.desc_ph"
+                        placeholder="Copier-coller l'annonce ou les points clés..."></textarea>
+                </label>
+            </div>
+            <div id="no-dup" class="dup-alert hidden"></div>
+        </div>
+        <div class="dlg-foot">
+            <button type="button" data-dlg-close data-i18n="drawer.cancel">Annuler</button>
+            <button type="submit" id="no-submit" class="pri" data-i18n="dlg.create">Créer la fiche</button>
+        </div>
+    </form>
+</dialog>

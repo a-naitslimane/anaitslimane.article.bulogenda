@@ -1,0 +1,156 @@
+<aside id="drawer" data-scope="contacts">
+    <div class="dh">
+        <div class="dh-top">
+            <input id="d-title" aria-label="Titre">
+            <span id="saved" class="mut"></span>
+            <button type="button" class="x" id="d-close" data-i18n-title="drawer.close"
+                title="Fermer (Échap)">✕</button>
+        </div>
+        <div id="d-links" class="quick-links"></div>
+        <textarea id="o-reason" data-f="reason" class="hidden reason-box" rows="2" data-i18n-ph="drawer.reason_ph"
+            placeholder="Motif de conclusion (ex. TJM trop bas, poste gelé…)"></textarea>
+        <div id="d-dup" class="dup-alert hidden"></div>
+    </div>
+
+    <datalist id="who-list"></datalist>
+
+    <div class="dbody">
+        <section class="blk">
+            <div class="section-head">
+                <h4 data-i18n="drawer.appointments">Rendez-vous & Entretiens</h4>
+                <button type="button" id="r-toggle" class="link" data-i18n="drawer.add">+ Planifier</button>
+            </div>
+            <div id="rlist" class="timeline"></div>
+            <form id="r-form" class="subform hidden">
+                <label><span data-i18n="drawer.appointment_kind">Type</span><select id="rd-kind"></select></label>
+                <label><span data-i18n="drawer.date">Date</span><input type="date" id="rd-day"></label>
+                <label><span data-i18n="drawer.interviewer">Interlocuteur</span><input id="rd-who" list="who-list"
+                        data-i18n-ph="drawer.interviewer_ph" placeholder="Nom, fonction…"></label>
+                <label><span data-i18n="drawer.appointment_status">Statut</span>
+                    <select id="rd-done">
+                        <option value="0">Planifié (à venir)</option>
+                        <option value="1">Réalisé (terminé)</option>
+                    </select>
+                </label>
+
+                <label class="full"><span data-i18n="drawer.appointment_prep">Ordre du jour /
+                        Préparation</span><textarea id="rd-prep" rows="2" data-i18n-ph="drawer.appointment_prep_ph"
+                        placeholder="Sujets à aborder, questions à poser…"></textarea></label>
+
+                <label class="full"><span data-i18n="drawer.appointment_feedback">Compte-rendu / Bilan</span><textarea
+                        id="rd-feedback" rows="3" data-i18n-ph="drawer.appointment_feedback_ph"
+                        placeholder="Synthèse, ressenti, prochaines étapes…"></textarea></label>
+
+                <div class="bar">
+                    <span></span>
+                    <button type="button" id="r-cancel" data-i18n="drawer.cancel">Annuler</button>
+                    <button class="pri" id="rd-save" data-i18n="drawer.save">Enregistrer</button>
+                </div>
+            </form>
+        </section>
+
+        <section class="blk">
+            <h4 data-i18n="drawer.journal">Journal des échanges (Historique)</h4>
+            <div class="journal-box">
+                <div class="pills sm-pills" id="d-kinds"></div>
+                <div class="qa">
+                    <div class="qa-top">
+                        <input id="ew" list="who-list" data-i18n-ph="drawer.event_who_ph" placeholder="Avec qui ?">
+                        <input type="date" id="ed">
+                    </div>
+                    <textarea id="en" rows="3" data-i18n-ph="drawer.event_ph"
+                        placeholder="Résumé de l'échange… (Ctrl+Entrée pour ajouter)"></textarea>
+                    <button type="button" id="ea" class="pri" data-i18n="drawer.add_btn">Ajouter</button>
+                </div>
+            </div>
+            <div id="el" class="timeline"></div>
+        </section>
+
+        <section class="blk">
+            <h4 data-i18n="drawer.info">Informations & Qualification</h4>
+            <div class="fields hide-opps">
+                <label><span data-i18n="drawer.role">Rôle</span><select id="c-role" data-f="role"></select></label>
+                <label><span data-i18n="drawer.company">Société / Cabinet</span><input id="c-company" data-f="company"
+                        data-i18n-ph="drawer.company_ph" placeholder="Nom de l'entreprise"></label>
+                <label><span data-i18n="drawer.email">Email</span><input id="c-email" data-f="email"
+                        placeholder="nom@domaine.com"></label>
+                <label><span data-i18n="drawer.phone">Téléphone</span><input id="c-phone" data-f="phone"
+                        placeholder="06 00 00 00 00"></label>
+                <label class="full"><span data-i18n="drawer.linkedin">Profil LinkedIn / Site web</span><input
+                        id="c-link" data-f="link" placeholder="https://…"></label>
+            </div>
+            <div class="fields hide-contacts">
+                <label class="full"><span data-i18n="drawer.opp_pos">Poste / Mission</span><input id="o-position"
+                        data-f="position" data-i18n-ph="drawer.opp_pos_ph"
+                        placeholder="Intitulé du poste (optionnel si spontanée)"></label>
+                <label><span data-i18n="drawer.source">Origine</span><select id="o-source"
+                        data-f="source"></select></label>
+                <label><span data-i18n="drawer.sent_at">Postulée / Envoyée le</span><input type="datetime-local"
+                        id="o-sent" data-f="sent_at"></label>
+                <label><span data-i18n="drawer.contract">Contrat</span><select id="o-contract"
+                        data-f="contract"></select></label>
+                <label><span data-i18n="drawer.structure">Type de structure</span><select id="o-kind"
+                        data-f="kind"></select></label>
+                <label><span data-i18n="drawer.salary">Rémunération / TJM</span><input id="o-salary" data-f="salary"
+                        data-i18n-ph="drawer.salary_ph" placeholder="ex. 600€/j ou 75k€"></label>
+                <label><span data-i18n="drawer.remote">Mode de travail</span><select id="o-remote"
+                        data-f="remote"></select></label>
+                <label><span data-i18n="drawer.location">Localisation</span><input id="o-location" data-f="location"
+                        data-i18n-ph="drawer.location_ph" placeholder="Ville / Quartier"></label>
+                <label><span data-i18n="drawer.duration">Durée / Visibilité</span><input id="o-duration"
+                        data-f="duration" data-i18n-ph="drawer.duration_ph" placeholder="ex. 6 mois renouv."></label>
+                <label><span data-i18n="drawer.start">Démarrage souhaité</span><input id="o-start" data-f="start_date"
+                        data-i18n-ph="drawer.start_ph" placeholder="ex. ASAP ou 01/11"></label>
+                <label><span data-i18n="drawer.team">Contexte équipe</span><input id="o-team" data-f="team"
+                        data-i18n-ph="drawer.team_ph" placeholder="Taille, stack, orga…"></label>
+                <label class="full"><span data-i18n="drawer.offer_link">Lien (Annonce, Site, LinkedIn)</span><input
+                        id="o-link" data-f="link" placeholder="https://…"></label>
+            </div>
+        </section>
+
+        <section class="blk hide-contacts">
+            <div class="section-head">
+                <h4 data-i18n="drawer.actors">Interlocuteurs & Intermédiaires rattachés</h4>
+                <button type="button" id="a-toggle" class="link" data-i18n="drawer.add">+ Ajouter</button>
+            </div>
+            <div id="alist" class="timeline"></div>
+            <form id="a-form" class="subform hidden">
+                <label><span data-i18n="drawer.actor_name">Nom / Structure</span><input id="an"
+                        data-i18n-ph="drawer.actor_name_ph" placeholder="Ex. Jean Dupont ou Cabinet X"></label>
+                <label><span data-i18n="drawer.actor_type">Rôle</span><select id="ar"></select></label>
+                <label><span data-i18n="drawer.actor_role_detail">Fonction / Précision</span><input id="ac"
+                        data-i18n-ph="drawer.actor_contact_ph"
+                        placeholder="Ex. CTO, DRH, Chargé de recrutement…"></label>
+                <label><span data-i18n="drawer.email">Email</span><input id="am" placeholder="Email"
+                        type="email"></label>
+                <label><span data-i18n="drawer.phone">Téléphone</span><input id="ap"
+                        placeholder="06 00 00 00 00"></label>
+                <label><span data-i18n="drawer.linkedin">Profil LinkedIn / Site web</span><input id="alk"
+                        placeholder="https://…"></label>
+                <div class="bar">
+                    <span></span>
+                    <button type="button" id="a-cancel" data-i18n="drawer.cancel">Annuler</button>
+                    <button class="pri" id="aa" data-i18n="drawer.save">Enregistrer</button>
+                </div>
+            </form>
+        </section>
+
+        <section class="blk hide-contacts">
+            <details class="fold" open>
+                <summary data-i18n="drawer.desc">Descriptif du poste</summary>
+                <textarea id="o-desc" data-f="description" rows="5" data-i18n-ph="drawer.desc_ph"
+                    placeholder="Copier-coller l'annonce ou les points clés..."></textarea>
+            </details>
+        </section>
+
+        <section class="blk">
+            <h4 data-i18n="drawer.notes">Notes personnelles</h4>
+            <textarea id="d-notes" data-f="notes" rows="4" data-i18n-ph="drawer.notes_ph"
+                placeholder="Contexte, ressenti, points de vigilance…"></textarea>
+        </section>
+
+        <div class="blk foot">
+            <button type="button" id="del" class="danger" data-i18n="drawer.delete">Supprimer cette fiche</button>
+        </div>
+    </div>
+</aside>

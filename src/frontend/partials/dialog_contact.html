@@ -1,0 +1,45 @@
+<dialog id="dlg-contact" class="dlg">
+    <form id="form-contact" method="dialog">
+        <div class="dlg-head">
+            <h3 data-i18n="dlg.contacts.h">Nouveau contact</h3>
+            <button type="button" class="x" data-dlg-close title="Fermer (Échap)">✕</button>
+        </div>
+        <div class="dlg-body">
+            <div class="dlg-grid">
+                <label class="full">
+                    <span data-i18n="dlg.contacts.la">Nom (personne ou cabinet)</span>
+                    <input id="nc-name" required>
+                </label>
+                <label>
+                    <span data-i18n="drawer.role">Rôle</span>
+                    <select id="nc-role"></select>
+                </label>
+                <label>
+                    <span data-i18n="drawer.company">Société / Cabinet</span>
+                    <input id="nc-company" data-i18n-ph="drawer.company_ph" placeholder="Nom de l'entreprise">
+                </label>
+                <label>
+                    <span data-i18n="drawer.email">Email</span>
+                    <input id="nc-email" type="email" placeholder="nom@domaine.com">
+                </label>
+                <label>
+                    <span data-i18n="drawer.phone">Téléphone</span>
+                    <input id="nc-phone" placeholder="06 00 00 00 00">
+                </label>
+                <label>
+                    <span data-i18n="drawer.linkedin">Profil LinkedIn / Site web</span>
+                    <input id="nc-link" placeholder="https://…">
+                </label>
+                <label>
+                    <span data-i18n="dlg.init_stage">Étape initiale</span>
+                    <select id="nc-stage"></select>
+                </label>
+            </div>
+            <div id="nc-dup" class="dup-alert hidden"></div>
+        </div>
+        <div class="dlg-foot">
+            <button type="button" data-dlg-close data-i18n="drawer.cancel">Annuler</button>
+            <button type="submit" id="nc-submit" class="pri" data-i18n="dlg.create">Créer la fiche</button>
+        </div>
+    </form>
+</dialog>

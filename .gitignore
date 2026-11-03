@@ -1,0 +1,33 @@
+# Environnements virtuels
+venv/
+env/
+ENV/
+
+# Cache Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+
+# Bases de données locales (données personnelles)
+*.db
+*.sqlite
+*.sqlite3
+data/
+
+# Distribution et packaging
+dist/
+build/
+*.egg-info/
+.eggs/
+
+# IDE et Éditeurs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS metadata
+.DS_Store
+Thumbs.db
