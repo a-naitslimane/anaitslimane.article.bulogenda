@@ -1,12 +1,12 @@
 from typing import Any
 
 from backend.config import HISTORY_LOG_FIELDS, SCOPES, SUB_FIELDS
-from backend.db.repository import ProspectionRepository
+from backend.db.repository import MainRepository
 from backend.utils import pick, today
 
 
-class ProspectionController:
-    def __init__(self, repo: ProspectionRepository):
+class MainController:
+    def __init__(self, repo: MainRepository):
         self.repo = repo
 
     def get_actors(self) -> tuple[int, Any]:

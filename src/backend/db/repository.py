@@ -3,7 +3,7 @@ from typing import Any
 from backend.db.engine import SQLiteEngine
 
 
-class ProspectionRepository:
+class MainRepository:
     def __init__(self, engine: SQLiteEngine):
         self.engine = engine
 

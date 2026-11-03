@@ -4,7 +4,7 @@ from http.server import BaseHTTPRequestHandler
 from typing import Any
 from urllib.parse import parse_qs, urlparse
 
-from backend.main_controller import ProspectionController
+from backend.main_controller import MainController
 from backend.static_service import StaticFileService
 
 ROUTE_SUB_ITEM = re.compile(r"^/api/(actors|history_logs|appointments)/(\d+)$")
@@ -14,7 +14,7 @@ ROUTE_SCOPED = re.compile(
 
 
 def make_handler(
-    controller: ProspectionController, static_service: StaticFileService
+    controller: MainController, static_service: StaticFileService
 ):
     class Handler(BaseHTTPRequestHandler):
         def log_message(self, *args: Any) -> None:

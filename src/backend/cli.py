@@ -11,9 +11,9 @@ from backend.config import (
     STATIC_DIR,
 )
 from backend.db.engine import SQLiteEngine
-from backend.db.repository import ProspectionRepository
+from backend.db.repository import MainRepository
 from backend.http_handler import make_handler
-from backend.main_controller import ProspectionController
+from backend.main_controller import MainController
 from backend.static_service import StaticFileService
 
 
@@ -32,8 +32,8 @@ def main() -> None:
     args = parser.parse_args()
 
     engine = SQLiteEngine(args.db, SCHEMA_PATH)
-    repo = ProspectionRepository(engine)
-    controller = ProspectionController(repo)
+    repo = MainRepository(engine)
+    controller = MainController(repo)
     static_service = StaticFileService(STATIC_DIR)
 
     server = ThreadingHTTPServer(
