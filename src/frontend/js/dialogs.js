@@ -17,7 +17,7 @@ export function anyDialogOpen() {
 
 export function openNew(stage) {
     if (state.view === "contacts") {
-        ["#nc-name", "#nc-company", "#nc-email", "#nc-phone", "#nc-link"].forEach((id) => {
+        ["#nc-name", "#nc-company", "#nc-location", "#nc-email", "#nc-phone", "#nc-link"].forEach((id) => {
             if ($(id)) $(id).value = "";
         });
         $("#nc-role").value = CROLES[0];
@@ -76,6 +76,7 @@ export function bindDialogEvents(onReload) {
             name,
             role: $("#nc-role").value,
             company: $("#nc-company").value.trim(),
+            location: $("#nc-location").value.trim(),
             email: $("#nc-email").value.trim(),
             phone: $("#nc-phone").value.trim(),
             link: $("#nc-link").value.trim(),

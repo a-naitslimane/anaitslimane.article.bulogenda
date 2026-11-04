@@ -12,7 +12,7 @@ function syncLocationVisibility() {
     $("#rd-loc-wrap").classList.toggle("hidden", !isOnsite);
     if (isOnsite && !$("#rd-location").value.trim()) {
         const o = cur();
-        if (state.curScope === "opps" && o && o.location) {
+        if (o && o.location) {
             $("#rd-location").value = o.location;
         }
     }

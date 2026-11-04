@@ -3,6 +3,7 @@ CREATE TABLE IF NOT EXISTS contacts (
     name TEXT NOT NULL,
     role TEXT DEFAULT 'recruiter',
     company TEXT DEFAULT '',
+    location TEXT DEFAULT '',
     email TEXT DEFAULT '',
     phone TEXT DEFAULT '',
     link TEXT DEFAULT '',

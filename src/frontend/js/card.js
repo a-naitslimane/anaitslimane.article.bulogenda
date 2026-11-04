@@ -57,9 +57,15 @@ export function renderCard(o) {
 
     const isOpps = state.view === "opps";
 
+    let contactSubHtml = "";
+    if (!isOpps) {
+        const parts = [trVal("role", o.role), o.company, o.location].filter(Boolean);
+        contactSubHtml = `<div class="c-sub">${esc(parts.join(" · "))}</div>`;
+    }
+
     return `<article draggable="true" data-id="${o.id}" class="${state.curScope === state.view && o.id === state.curId ? "sel " : ""}${closed ? "closed" : ""}">
     <strong class="c-title">${esc(titleOf(state.view, o))}</strong>
-    ${isOpps && o.position ? `<div class="c-pos">${esc(o.position)}</div>` : !isOpps ? `<div class="c-sub">${esc(trVal("role", o.role))}</div>` : ""}
+    ${isOpps && o.position ? `<div class="c-pos">${esc(o.position)}</div>` : contactSubHtml}
     ${isOpps ? oppExtra(o) : ""}
     ${due}
     ${dupBadge}
