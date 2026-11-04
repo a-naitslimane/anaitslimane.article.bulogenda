@@ -18,14 +18,13 @@
         <section class="blk">
             <div class="section-head">
                 <h4 data-i18n="drawer.appointments">Rendez-vous & Entretiens</h4>
-                <button type="button" id="r-toggle" class="link" data-i18n="drawer.add">+ Planifier</button>
+                <button type="button" id="r-toggle" class="link" data-i18n="drawer.add">+ Ajouter</button>
             </div>
-            <div id="rlist" class="timeline"></div>
+
             <form id="r-form" class="subform hidden">
                 <label><span data-i18n="drawer.appointment_kind">Type</span><select id="rd-kind"></select></label>
                 <label><span data-i18n="drawer.appointment_mode">Format</span><select id="rd-mode"></select></label>
-                <label><span data-i18n="drawer.date">Date & Heure</span><input type="datetime-local"
-                        id="rd-day"></label>
+                <label><span data-i18n="drawer.date">Date</span><input type="datetime-local" id="rd-day"></label>
                 <label><span data-i18n="drawer.interviewer">Interlocuteur</span><input id="rd-who" list="who-list"
                         data-i18n-ph="drawer.interviewer_ph" placeholder="Nom, fonction…"></label>
                 <label id="rd-loc-wrap" class="full hidden">
@@ -39,21 +38,27 @@
                         <option value="1">Réalisé (terminé)</option>
                     </select>
                 </label>
-
                 <label class="full"><span data-i18n="drawer.appointment_prep">Ordre du jour /
                         Préparation</span><textarea id="rd-prep" rows="2" data-i18n-ph="drawer.appointment_prep_ph"
-                        placeholder="Sujets à aborder, questions à poser…"></textarea></label>
-
-                <label class="full"><span data-i18n="drawer.appointment_feedback">Compte-rendu / Bilan</span><textarea
-                        id="rd-feedback" rows="3" data-i18n-ph="drawer.appointment_feedback_ph"
+                        placeholder="Points à aborder, questions à poser…"></textarea></label>
+                <label class="full"><span data-i18n="drawer.appointment_feedback">Compte-rendu /
+                        Ressenti</span><textarea id="rd-feedback" rows="2" data-i18n-ph="drawer.appointment_feedback_ph"
                         placeholder="Synthèse, ressenti, prochaines étapes…"></textarea></label>
-
                 <div class="bar">
                     <span></span>
                     <button type="button" id="r-cancel" data-i18n="drawer.cancel">Annuler</button>
-                    <button class="pri" id="rd-save" data-i18n="drawer.save">Enregistrer</button>
+                    <button type="submit" class="pri" id="rd-save" data-i18n="drawer.save">Enregistrer</button>
                 </div>
             </form>
+
+            <div id="next-appointment-container"></div>
+            <div id="past-appointments-wrapper" class="hidden">
+                <button type="button" id="past-toggle-btn" class="past-toggle-trigger">
+                    <span id="past-count-label">Voir les rendez-vous passés</span>
+                    <span class="chevron">▾</span>
+                </button>
+                <div id="rlist-past" class="sublist hidden"></div>
+            </div>
         </section>
 
         <section class="blk">

@@ -5,6 +5,7 @@ import { t, trVal } from "./i18n.js";
 import { state, cur, appointmentsOf } from "./store.js";
 
 let editAppointment = null;
+let showPastSection = false;
 
 function syncLocationVisibility() {
     const isOnsite = $("#rd-mode").value === "onsite";
@@ -17,48 +18,77 @@ function syncLocationVisibility() {
     }
 }
 
+function buildAppointmentCard(a) {
+    const late = !a.done && String(a.day).slice(0, 10) < today();
+    const statusBadge = a.done
+        ? `<span class="badge">${esc(t("drawer.badge_done"))}</span>`
+        : late
+          ? `<span class="badge late">${esc(t("drawer.badge_late"))}</span>`
+          : `<span class="badge soon">${esc(t("drawer.badge_soon"))}</span>`;
+
+    const completeBtn = !a.done ? `<button type="button" class="btn-rd-done" data-appt-finish="${a.id}">${esc(t("drawer.btn_complete"))}</button>` : "";
+
+    const locLine = a.mode === "onsite" && a.location ? `<div class="appt-who">${esc(a.location)}</div>` : "";
+    const prepBlock = a.prep ? `<div class="rd-box"><span class="rd-lbl">${esc(t("drawer.lbl_prep"))}</span><div class="rd-txt">${esc(a.prep)}</div></div>` : "";
+    const feedbackBlock = a.feedback ? `<div class="rd-box rd-cr"><span class="rd-lbl">${esc(t("drawer.lbl_feedback"))}</span><div class="rd-txt">${esc(a.feedback)}</div></div>` : "";
+
+    return `<div class="appt-item ${a.done ? "is-done" : ""}">
+        <div class="appt-top">
+            <div class="appt-title">
+                <b>${esc(fmtDateTime(a.day))}</b>
+                <span class="mut">·</span>
+                <span class="appt-kind">${esc(trVal("appointment", a.kind))}</span>
+                <span class="badge">${esc(trVal("mode", a.mode || "phone"))}</span>
+                ${statusBadge}
+            </div>
+            <div class="appt-actions">
+                ${completeBtn}
+                <button type="button" class="btn-icon" data-re="${a.id}" title="${esc(t("drawer.update"))}">✎</button>
+                <button type="button" class="btn-icon danger" data-rx="${a.id}" title="${esc(t("drawer.delete"))}">×</button>
+            </div>
+        </div>
+        ${a.who ? `<div class="appt-who">${esc(a.who)}</div>` : ""}
+        ${locLine}
+        ${prepBlock}
+        ${feedbackBlock}
+    </div>`;
+}
+
 export function renderAppointments() {
     if (!state.curId) return;
-    $("#rlist").innerHTML =
-        appointmentsOf(state.curScope, state.curId)
-            .map((a) => {
-                const late = !a.done && String(a.day).slice(0, 10) < today();
-                const statusBadge = a.done
-                    ? `<span class="badge">${esc(t("drawer.badge_done"))}</span>`
-                    : late
-                      ? `<span class="badge late">${esc(t("drawer.badge_late"))}</span>`
-                      : `<span class="badge soon">${esc(t("drawer.badge_soon"))}</span>`;
+    const allAppts = appointmentsOf(state.curScope, state.curId);
 
-                const completeBtn = !a.done ? `<button type="button" class="btn-rd-done" data-appt-finish="${a.id}">${esc(t("drawer.btn_complete"))}</button>` : "";
+    const activeAppts = allAppts.filter((a) => !a.done);
+    const pastAppts = allAppts.filter((a) => a.done);
 
-                const locLine = a.mode === "onsite" && a.location ? `<div class="appt-who">${esc(a.location)}</div>` : "";
+    const nextContainer = $("#next-appointment-container");
+    if (nextContainer) {
+        nextContainer.innerHTML =
+            activeAppts.length > 0 ? activeAppts.map((a) => buildAppointmentCard(a)).join("") : `<div class="mut sm" style="padding: 8px 0;">${esc(t("drawer.no_next_appointment"))}</div>`;
+    }
 
-                const prepBlock = a.prep ? `<div class="rd-box"><span class="rd-lbl">${esc(t("drawer.lbl_prep"))}</span><div class="rd-txt">${esc(a.prep)}</div></div>` : "";
+    const pastWrapper = $("#past-appointments-wrapper");
+    const pastList = $("#rlist-past");
+    const pastToggleBtn = $("#past-toggle-btn");
+    const pastCountLabel = $("#past-count-label");
 
-                const feedbackBlock = a.feedback ? `<div class="rd-box rd-cr"><span class="rd-lbl">${esc(t("drawer.lbl_feedback"))}</span><div class="rd-txt">${esc(a.feedback)}</div></div>` : "";
+    if (pastWrapper && pastList && pastToggleBtn) {
+        if (pastAppts.length > 0) {
+            pastWrapper.classList.remove("hidden");
+            pastCountLabel.textContent = showPastSection ? t("drawer.hide_past") : t("drawer.show_past", { n: pastAppts.length });
 
-                return `<div class="appt-item ${a.done ? "is-done" : ""}">
-                    <div class="appt-top">
-                        <div class="appt-title">
-                            <b>${esc(fmtDateTime(a.day))}</b>
-                            <span class="mut">·</span>
-                            <span class="appt-kind">${esc(trVal("appointment", a.kind))}</span>
-                            <span class="badge">${esc(trVal("mode", a.mode || "phone"))}</span>
-                            ${statusBadge}
-                        </div>
-                        <div class="appt-actions">
-                            ${completeBtn}
-                            <button type="button" class="btn-icon" data-re="${a.id}" title="${esc(t("drawer.update"))}">✎</button>
-                            <button type="button" class="btn-icon danger" data-rx="${a.id}" title="${esc(t("drawer.delete"))}">×</button>
-                        </div>
-                    </div>
-                    ${a.who ? `<div class="appt-who">${esc(a.who)}</div>` : ""}
-                    ${locLine}
-                    ${prepBlock}
-                    ${feedbackBlock}
-                </div>`;
-            })
-            .join("") || `<div class="mut sm">${esc(t("drawer.no_appointments"))}</div>`;
+            pastList.classList.toggle("hidden", !showPastSection);
+            pastList.innerHTML = pastAppts.map((a) => buildAppointmentCard(a)).join("");
+
+            pastToggleBtn.onclick = () => {
+                showPastSection = !showPastSection;
+                renderAppointments();
+            };
+        } else {
+            pastWrapper.classList.add("hidden");
+            showPastSection = false;
+        }
+    }
 }
 
 export function showAppointmentForm(show, a = null, focusFeedback = false) {

@@ -501,3 +501,42 @@ details.fold summary {
     text-align: center;
     padding: 12px;
 }
+
+#next-appointment-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.subform:not(.hidden) + #next-appointment-container {
+    margin-top: 10px;
+}
+
+.past-toggle-trigger {
+    width: 100%;
+    background: transparent;
+    border: 1px dashed var(--bd-strong);
+    color: var(--tx-sec);
+    padding: 7px 12px;
+    font-size: 12px;
+    font-weight: 500;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.past-toggle-trigger:hover {
+    background: var(--subtle);
+    color: var(--tx);
+    border-color: var(--tx-sec);
+}
+
+.sublist {
+    margin-top: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}

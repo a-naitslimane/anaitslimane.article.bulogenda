@@ -158,4 +158,8 @@ export const en = {
     "mode.onsite": "In-person",
     "drawer.appointment_loc": "Address / Location",
     "drawer.appointment_loc_ph": "e.g. 10 Downing St, Building B…",
+    "drawer.past_appointments": "Past appointments",
+    "drawer.show_past": "View past appointments ({n})",
+    "drawer.hide_past": "Hide past appointments",
+    "drawer.no_next_appointment": "No upcoming appointments scheduled.",
 };

@@ -158,4 +158,8 @@ export const fr = {
     "mode.onsite": "Physique",
     "drawer.appointment_loc": "Adresse / Lieu",
     "drawer.appointment_loc_ph": "Ex. 316 Route de Bayonne, Toulouse (Bât. M01)…",
+    "drawer.past_appointments": "Rendez-vous passés",
+    "drawer.show_past": "Voir les rendez-vous passés ({n})",
+    "drawer.hide_past": "Masquer les rendez-vous passés",
+    "drawer.no_next_appointment": "Aucun rendez-vous à venir planifié.",
 };
