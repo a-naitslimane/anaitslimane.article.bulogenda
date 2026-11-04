@@ -58,6 +58,8 @@ CREATE TABLE IF NOT EXISTS appointments (
     scope TEXT DEFAULT 'opps',
     ref INTEGER NOT NULL,
     kind TEXT DEFAULT 'discovery_call',
+    mode TEXT DEFAULT 'phone',
+    location TEXT DEFAULT '',
     day TEXT NOT NULL,
     who TEXT DEFAULT '',
     prep TEXT DEFAULT '',

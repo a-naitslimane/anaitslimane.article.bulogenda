@@ -23,10 +23,17 @@
             <div id="rlist" class="timeline"></div>
             <form id="r-form" class="subform hidden">
                 <label><span data-i18n="drawer.appointment_kind">Type</span><select id="rd-kind"></select></label>
-                <label><span data-i18n="drawer.date">Date</span><input type="date" id="rd-day"></label>
+                <label><span data-i18n="drawer.appointment_mode">Format</span><select id="rd-mode"></select></label>
+                <label><span data-i18n="drawer.date">Date & Heure</span><input type="datetime-local"
+                        id="rd-day"></label>
                 <label><span data-i18n="drawer.interviewer">Interlocuteur</span><input id="rd-who" list="who-list"
                         data-i18n-ph="drawer.interviewer_ph" placeholder="Nom, fonction…"></label>
-                <label><span data-i18n="drawer.appointment_status">Statut</span>
+                <label id="rd-loc-wrap" class="full hidden">
+                    <span data-i18n="drawer.appointment_loc">Adresse / Lieu</span>
+                    <input id="rd-location" data-i18n-ph="drawer.appointment_loc_ph"
+                        placeholder="Ex. 316 Route de Bayonne, Toulouse…">
+                </label>
+                <label class="full"><span data-i18n="drawer.appointment_status">Statut</span>
                     <select id="rd-done">
                         <option value="0">Planifié (à venir)</option>
                         <option value="1">Réalisé (terminé)</option>

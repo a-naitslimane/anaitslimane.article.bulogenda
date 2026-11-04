@@ -1,17 +1,28 @@
 import { $, esc } from "./dom.js";
-import { today, fmt } from "./date.js";
+import { today, nowLocalISO, fmtDateTime } from "./date.js";
 import { api } from "./http.js";
 import { t, trVal } from "./i18n.js";
 import { state, cur, appointmentsOf } from "./store.js";
 
 let editAppointment = null;
 
+function syncLocationVisibility() {
+    const isOnsite = $("#rd-mode").value === "onsite";
+    $("#rd-loc-wrap").classList.toggle("hidden", !isOnsite);
+    if (isOnsite && !$("#rd-location").value.trim()) {
+        const o = cur();
+        if (state.curScope === "opps" && o && o.location) {
+            $("#rd-location").value = o.location;
+        }
+    }
+}
+
 export function renderAppointments() {
     if (!state.curId) return;
     $("#rlist").innerHTML =
         appointmentsOf(state.curScope, state.curId)
             .map((a) => {
-                const late = !a.done && a.day < today();
+                const late = !a.done && String(a.day).slice(0, 10) < today();
                 const statusBadge = a.done
                     ? `<span class="badge">${esc(t("drawer.badge_done"))}</span>`
                     : late
@@ -20,6 +31,8 @@ export function renderAppointments() {
 
                 const completeBtn = !a.done ? `<button type="button" class="btn-rd-done" data-appt-finish="${a.id}">${esc(t("drawer.btn_complete"))}</button>` : "";
 
+                const locLine = a.mode === "onsite" && a.location ? `<div class="appt-who">${esc(a.location)}</div>` : "";
+
                 const prepBlock = a.prep ? `<div class="rd-box"><span class="rd-lbl">${esc(t("drawer.lbl_prep"))}</span><div class="rd-txt">${esc(a.prep)}</div></div>` : "";
 
                 const feedbackBlock = a.feedback ? `<div class="rd-box rd-cr"><span class="rd-lbl">${esc(t("drawer.lbl_feedback"))}</span><div class="rd-txt">${esc(a.feedback)}</div></div>` : "";
@@ -27,9 +40,10 @@ export function renderAppointments() {
                 return `<div class="appt-item ${a.done ? "is-done" : ""}">
                     <div class="appt-top">
                         <div class="appt-title">
-                            <b>${fmt(a.day)}</b>
+                            <b>${esc(fmtDateTime(a.day))}</b>
                             <span class="mut">·</span>
                             <span class="appt-kind">${esc(trVal("appointment", a.kind))}</span>
+                            <span class="badge">${esc(trVal("mode", a.mode || "phone"))}</span>
                             ${statusBadge}
                         </div>
                         <div class="appt-actions">
@@ -39,6 +53,7 @@ export function renderAppointments() {
                         </div>
                     </div>
                     ${a.who ? `<div class="appt-who">${esc(a.who)}</div>` : ""}
+                    ${locLine}
                     ${prepBlock}
                     ${feedbackBlock}
                 </div>`;
@@ -52,7 +67,9 @@ export function showAppointmentForm(show, a = null, focusFeedback = false) {
     editAppointment = a ? a.id : null;
     const defaultKind = state.curScope === "contacts" ? "discovery_call" : "hr_interview";
     $("#rd-kind").value = a ? a.kind : defaultKind;
-    $("#rd-day").value = a ? a.day : today();
+    $("#rd-mode").value = a && a.mode ? a.mode : "phone";
+    $("#rd-location").value = a && a.location ? a.location : "";
+    $("#rd-day").value = a ? (a.day.length === 10 ? `${a.day}T09:00` : a.day) : nowLocalISO();
     const o = cur();
     const defaultWho = state.curScope === "contacts" && o ? o.name : "";
     $("#rd-who").value = a ? a.who || "" : defaultWho;
@@ -60,6 +77,7 @@ export function showAppointmentForm(show, a = null, focusFeedback = false) {
     $("#rd-prep").value = a ? a.prep || "" : "";
     $("#rd-feedback").value = a ? a.feedback || "" : "";
     $("#rd-save").textContent = a ? t("drawer.update") : t("drawer.save");
+    syncLocationVisibility();
     if (show) {
         if (focusFeedback) {
             $("#rd-done").value = "1";
@@ -97,10 +115,14 @@ export async function handleAppointmentClick(hit, onReload) {
 export function bindAppointmentForm(onReload) {
     $("#r-toggle").onclick = () => showAppointmentForm(true, null);
     $("#r-cancel").onclick = () => showAppointmentForm(false, null);
+    $("#rd-mode").onchange = syncLocationVisibility;
     $("#r-form").onsubmit = async (e) => {
         e.preventDefault();
+        const mode = $("#rd-mode").value;
         const d = {
             kind: $("#rd-kind").value,
+            mode,
+            location: mode === "onsite" ? $("#rd-location").value.trim() : "",
             day: $("#rd-day").value,
             who: $("#rd-who").value.trim(),
             done: +$("#rd-done").value,

@@ -44,7 +44,7 @@ OPP_FIELDS = [
 ]
 
 ACTOR_FIELDS = ["name", "role", "contact", "email", "phone", "link", "day"]
-APPOINTMENT_FIELDS = ["day", "kind", "who", "done", "prep", "feedback"]
+APPOINTMENT_FIELDS = ["day", "kind", "mode", "location", "who", "done", "prep", "feedback"]
 HISTORY_LOG_FIELDS = ["day", "kind", "who", "note"]
 
 SUB_FIELDS = {

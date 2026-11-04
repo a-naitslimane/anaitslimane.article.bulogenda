@@ -1,4 +1,4 @@
-import { CROLES, COMPANY_KINDS, CONTRACTS, REMOTES, APPOINTMENT_KINDS, IROLES, OPP_SOURCES } from "./constants.js";
+import { CROLES, COMPANY_KINDS, CONTRACTS, REMOTES, APPOINTMENT_KINDS, IROLES, OPP_SOURCES, APPOINTMENT_MODES } from "./constants.js";
 import { $, setOptions } from "./dom.js";
 import { today } from "./date.js";
 import { api } from "./http.js";
@@ -34,6 +34,7 @@ function populateSelects() {
     setOptions("#no-source", opts(OPP_SOURCES, "source"));
     setOptions("#no-contract", opts(CONTRACTS, "contract"));
     setOptions("#ar", opts(IROLES, "role"));
+    setOptions("#rd-mode", opts(APPOINTMENT_MODES, "mode"));
     updateFilterDropdown();
 }
 

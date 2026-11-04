@@ -9,10 +9,16 @@ export function renderAgenda() {
     el.innerHTML =
         state.upcomingAppointments
             .map((a) => {
-                const labelKind = trVal("appointment", a.kind);
-                const contentText = a.prep || a.feedback || "";
-                const noteText = [labelKind, a.who, contentText].filter(Boolean).join(" · ");
-                return `<li data-scope="${a.scope}" data-id="${a.ref}"><b>${dueLabel(a.day)}</b> <strong>${esc(a.title)}</strong> <span>${esc(noteText)}</span></li>`;
+                const modeBase = trVal("mode", a.mode || "phone");
+                const modeLabel = a.mode === "onsite" && a.location ? `${modeBase} (${a.location})` : modeBase;
+                const details = [a.who, modeLabel].filter(Boolean).join(" · ");
+                const mainLabel = a.company || a.who || "";
+                const subLabel = a.company ? details : modeLabel;
+                return `<li data-scope="${a.scope}" data-id="${a.ref}">
+                    <b>${esc(dueLabel(a.day))}</b>
+                    <strong>${esc(mainLabel)}</strong>
+                    <span>${esc(subLabel)}</span>
+                </li>`;
             })
             .join("") || `<li class="mut">${esc(t("agenda.empty_rdv"))}</li>`;
 }

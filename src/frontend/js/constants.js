@@ -20,6 +20,7 @@ export const CONTRACTS = ["", "freelance", "cdi", "portage", "other"];
 export const REMOTES = ["", "onsite", "hybrid", "remote"];
 
 export const APPOINTMENT_KINDS = ["discovery_call", "hr_interview", "tech_interview", "cto_interview", "tech_test", "team_fit", "client_interview", "other"];
+export const APPOINTMENT_MODES = ["phone", "video", "onsite"];
 
 export const IROLES = ["employee", "headhunter", "agency", "esn", "platform", "network", "other"];
 

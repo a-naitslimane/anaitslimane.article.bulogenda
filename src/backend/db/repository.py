@@ -48,17 +48,19 @@ class MainRepository:
     def list_upcoming_appointments(self, start_day: str) -> list[dict[str, Any]]:
         sql = """
         SELECT a.day, 'contacts' AS scope, a.ref,
-               c.name || CASE WHEN c.company != '' THEN ' (' || c.company || ')' ELSE '' END AS title,
-               a.prep, a.feedback, a.kind, a.who
+               c.company AS company,
+               CASE WHEN a.who != '' THEN a.who ELSE c.name END AS who,
+               a.mode, a.location, a.kind
         FROM appointments a JOIN contacts c ON c.id = a.ref
-        WHERE a.scope = 'contacts' AND a.done = 0 AND a.day >= ?
+        WHERE a.scope = 'contacts' AND a.done = 0 AND substr(a.day, 1, 10) >= ?
         UNION ALL
         SELECT a.day, 'opps' AS scope, a.ref,
-               o.company || CASE WHEN o.position != '' THEN ' · ' || o.position ELSE '' END AS title,
-               a.prep, a.feedback, a.kind, a.who
+               o.company AS company,
+               a.who AS who,
+               a.mode, a.location, a.kind
         FROM appointments a JOIN opportunities o ON o.id = a.ref
-        WHERE a.scope = 'opps' AND a.done = 0 AND a.day >= ?
-        ORDER BY day ASC
+        WHERE a.scope = 'opps' AND a.done = 0 AND substr(a.day, 1, 10) >= ?
+        ORDER BY a.day ASC
         """
         return self.engine.run(sql, [start_day, start_day])
 

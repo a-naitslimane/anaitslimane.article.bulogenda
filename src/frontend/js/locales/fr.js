@@ -152,4 +152,10 @@ export const fr = {
     "ev.email": "Email",
     "ev.call": "Appel",
     "ev.other": "Autre",
+    "drawer.appointment_mode": "Format",
+    "mode.phone": "Téléphonique",
+    "mode.video": "Visio",
+    "mode.onsite": "Physique",
+    "drawer.appointment_loc": "Adresse / Lieu",
+    "drawer.appointment_loc_ph": "Ex. 316 Route de Bayonne, Toulouse (Bât. M01)…",
 };

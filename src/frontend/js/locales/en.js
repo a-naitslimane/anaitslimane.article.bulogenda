@@ -152,4 +152,10 @@ export const en = {
     "ev.email": "Email",
     "ev.call": "Call",
     "ev.other": "Other",
+    "drawer.appointment_mode": "Format",
+    "mode.phone": "Phone",
+    "mode.video": "Video",
+    "mode.onsite": "In-person",
+    "drawer.appointment_loc": "Address / Location",
+    "drawer.appointment_loc_ph": "e.g. 10 Downing St, Building B…",
 };
