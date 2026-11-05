@@ -3,6 +3,7 @@ import { today, nowLocalISO, fmtDateTime } from "./date.js";
 import { api } from "./http.js";
 import { t, trVal } from "./i18n.js";
 import { state, cur, appointmentsOf } from "./store.js";
+import { ICONS } from "./constants.js";
 
 let editAppointment = null;
 let showPastSection = false;
@@ -19,6 +20,10 @@ function syncLocationVisibility() {
 }
 
 function buildAppointmentCard(a) {
+    const mode = a.mode || "phone";
+    const modeIcon = ICONS[mode] || ICONS.phone || "";
+    const modeLabel = trVal("mode", mode);
+
     const late = !a.done && String(a.day).slice(0, 10) < today();
     const statusBadge = a.done
         ? `<span class="badge">${esc(t("drawer.badge_done"))}</span>`
@@ -26,28 +31,35 @@ function buildAppointmentCard(a) {
           ? `<span class="badge late">${esc(t("drawer.badge_late"))}</span>`
           : `<span class="badge soon">${esc(t("drawer.badge_soon"))}</span>`;
 
-    const completeBtn = !a.done ? `<button type="button" class="btn-rd-done" data-appt-finish="${a.id}">${esc(t("drawer.btn_complete"))}</button>` : "";
+    const checkIcon = ICONS.check || "✓";
+    const editIcon = ICONS.edit || "✎";
+    const trashIcon = ICONS.trash || "×";
 
-    const locLine = a.mode === "onsite" && a.location ? `<div class="appt-who">${esc(a.location)}</div>` : "";
+    const completeBtn = !a.done ? `<button type="button" class="btn-rd-done" data-appt-finish="${a.id}">${checkIcon}<span>${esc(t("drawer.btn_complete"))}</span></button>` : "";
+
+    const metaParts = [`<span class="appt-kind">${esc(trVal("appointment", a.kind))}</span>`, a.who ? `<span class="appt-person">${esc(a.who)}</span>` : ""].filter(Boolean);
+
+    const locLine = mode === "onsite" && a.location ? `<div class="appt-loc">${ICONS.onsite || ""}${esc(a.location)}</div>` : "";
+
     const prepBlock = a.prep ? `<div class="rd-box"><span class="rd-lbl">${esc(t("drawer.lbl_prep"))}</span><div class="rd-txt">${esc(a.prep)}</div></div>` : "";
     const feedbackBlock = a.feedback ? `<div class="rd-box rd-cr"><span class="rd-lbl">${esc(t("drawer.lbl_feedback"))}</span><div class="rd-txt">${esc(a.feedback)}</div></div>` : "";
 
     return `<div class="appt-item ${a.done ? "is-done" : ""}">
         <div class="appt-top">
             <div class="appt-title">
+                <span class="appt-mode-ico" title="${esc(modeLabel)}">${modeIcon}</span>
                 <b>${esc(fmtDateTime(a.day))}</b>
-                <span class="mut">·</span>
-                <span class="appt-kind">${esc(trVal("appointment", a.kind))}</span>
-                <span class="badge">${esc(trVal("mode", a.mode || "phone"))}</span>
                 ${statusBadge}
             </div>
             <div class="appt-actions">
                 ${completeBtn}
-                <button type="button" class="btn-icon" data-re="${a.id}" title="${esc(t("drawer.update"))}">✎</button>
-                <button type="button" class="btn-icon danger" data-rx="${a.id}" title="${esc(t("drawer.delete"))}">×</button>
+                <div class="appt-btn-group">
+                    <button type="button" class="btn-icon" data-re="${a.id}" title="${esc(t("drawer.update"))}">${editIcon}</button>
+                    <button type="button" class="btn-icon danger" data-rx="${a.id}" title="${esc(t("drawer.delete"))}">${trashIcon}</button>
+                </div>
             </div>
         </div>
-        ${a.who ? `<div class="appt-who">${esc(a.who)}</div>` : ""}
+        <div class="appt-sub">${metaParts.join(`<span class="mut">·</span>`)}</div>
         ${locLine}
         ${prepBlock}
         ${feedbackBlock}

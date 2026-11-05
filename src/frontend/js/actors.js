@@ -1,9 +1,9 @@
-import { IROLES, ROLE_COLORS } from "./constants.js";
 import { $, esc, url } from "./dom.js";
 import { today, fmt } from "./date.js";
 import { api } from "./http.js";
 import { t, trVal } from "./i18n.js";
 import { state, byOpp } from "./store.js";
+import { IROLES, ROLE_COLORS, ICONS } from "./constants.js";
 
 let editActor = null;
 
@@ -22,7 +22,7 @@ export function renderActors() {
                     .join(" · ");
                 return `<div class="actor"><i class="dot big" style="background:${col}"></i><div class="ab">
       <div><b>${esc(a.name)}</b> <span class="badge" style="color:${col};border-color:${col}">${esc(trVal("role", a.role))}</span>
-      <span class="r hov"><button type="button" class="x" data-ae="${a.id}">✎</button><button type="button" class="x" data-ad="${a.id}">×</button></span></div>
+      <span class="r hov appt-btn-group"><button type="button" class="btn-icon" data-ae="${a.id}" title="${esc(t("drawer.update"))}">${ICONS.edit}</button><button type="button" class="btn-icon danger" data-ad="${a.id}" title="${esc(t("drawer.delete"))}">${ICONS.trash}</button></span></div>
       ${a.contact ? `<div class="mut sm">${esc(a.contact)}</div>` : ""}
       ${links ? `<div class="sm">${links}</div>` : ""}
       ${a.day ? `<div class="mut sm">${esc(t("drawer.linked_on"))} ${fmt(a.day)}</div>` : ""}</div></div>`;

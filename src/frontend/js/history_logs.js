@@ -18,7 +18,7 @@ export async function loadHistoryLogs() {
                 (x) => `<div class="ev"><span class="ico">${ICONS[x.kind] || ICONS.other}</span><div class="eb">
     <div><b>${fmt(x.day)}</b> · <span class="mut sm">${esc(trVal("ev", x.kind))}</span>${
         x.who ? ` · <strong class="sm">${esc(x.who)}</strong>` : ""
-    }<button type="button" class="x r hov" data-ev="${x.id}">×</button></div>
+    }<button type="button" class="btn-icon danger x r hov" data-ev="${x.id}" title="${esc(t("drawer.delete"))}">${ICONS.trash}</button></div>
     ${x.note ? `<div style="margin-top:2px">${esc(x.note)}</div>` : ""}</div></div>`,
             )
             .join("") || `<div class="mut sm">${esc(t("drawer.no_events"))}</div>`;
