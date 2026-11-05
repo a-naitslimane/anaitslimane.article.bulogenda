@@ -2,6 +2,12 @@
 
 A minimalist, ultra-lightweight local-first application for tracking prospection, job applications. Built with a strict, clean architecture (Python standard library, SQLite, and native ES Modules).
 
+### 🗂️ Opportunity Details, Interviews & Interaction Log
+![Dashboard View](screenshots/screen-dashboard.png)
+
+### 📊 Kanban Dashboard & Upcoming Agenda
+![Drawer Details View](screenshots/screen-rdv.png)
+
 ## 📋 Prerequisites
 
 Before you begin, ensure you have the following installed on your system:
@@ -30,7 +36,15 @@ Before you begin, ensure you have the following installed on your system:
    pip install -e .
    ```
 
-4. **Run the application**:
+4. **Loading Demo Data (Optional)**
+
+   If you want to explore the interface with a realistic sample dataset (contacts, opportunities across all Kanban stages, upcoming/past interviews, and interaction logs), start `bulogenda` once so it initializes `suivi.db`[cite: 21, 22], then run from the project root:
+
+   ```bash
+   sqlite3 suivi.db ".read demo.sql"
+   ```
+
+5. **Run the application**:
    ```bash
    bulogenda
    ```
