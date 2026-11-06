@@ -5,6 +5,15 @@ import { t, trVal } from "./i18n.js";
 import { state, titleOf, isClosed, byOpp, appointmentsOf } from "./store.js";
 import { renderDuplicateBadge } from "./duplicates.js";
 
+function fmtLoc(loc) {
+    if (!loc) return "";
+    const idx = loc.lastIndexOf(",");
+    if (idx === -1) return `<b class="loc-country">${esc(loc.trim())}</b>`;
+    const city = loc.slice(0, idx).trim();
+    const country = loc.slice(idx + 1).trim();
+    return `${esc(city)}, <b class="loc-country">${esc(country)}</b>`;
+}
+
 function oppExtra(o) {
     const appts = appointmentsOf(state.view, o.id);
     const as = byOpp(o.id);
@@ -12,7 +21,7 @@ function oppExtra(o) {
     const tags = [];
     if (o.contract) tags.push(`<span class="c-tag">${esc(trVal("contract", o.contract))}</span>`);
     if (o.remote) tags.push(`<span class="c-tag">${esc(trVal("remote", o.remote))}</span>`);
-    if (o.location) tags.push(`<span class="c-tag tag-loc">${esc(o.location)}</span>`);
+    if (o.location) tags.push(`<span class="c-tag tag-loc">${fmtLoc(o.location)}</span>`);
     if (o.salary) tags.push(`<span class="c-tag tag-sal">${esc(o.salary)}</span>`);
 
     const tagsHtml = tags.length ? `<div class="c-tags">${tags.join("")}</div>` : "";
@@ -59,8 +68,8 @@ export function renderCard(o) {
 
     let contactSubHtml = "";
     if (!isOpps) {
-        const parts = [trVal("role", o.role), o.company, o.location].filter(Boolean);
-        contactSubHtml = `<div class="c-sub">${esc(parts.join(" · "))}</div>`;
+        const parts = [esc(trVal("role", o.role)), esc(o.company), fmtLoc(o.location)].filter(Boolean);
+        contactSubHtml = `<div class="c-sub">${parts.join(" · ")}</div>`;
     }
 
     return `<article draggable="true" data-id="${o.id}" class="${state.curScope === state.view && o.id === state.curId ? "sel " : ""}${closed ? "closed" : ""}">

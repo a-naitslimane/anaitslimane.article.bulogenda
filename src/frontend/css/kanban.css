@@ -216,3 +216,12 @@ article .c-reason {
     border-radius: 0 4px 4px 0;
     line-height: 1.4;
 }
+
+.loc-country {
+    font-weight: 700;
+    color: #1e3a8a;
+    text-decoration: underline;
+    text-decoration-thickness: 1.5px;
+    text-decoration-color: rgba(30, 58, 138, 0.45);
+    text-underline-offset: 2px;
+}
