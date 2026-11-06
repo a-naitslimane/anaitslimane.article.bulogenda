@@ -18,7 +18,7 @@ Before you begin, ensure you have the following installed on your system:
 
 1. **Clone or copy (zip) the repository**:
    ```bash
-   git clone <repository-url>
+   git clone git@github.com:a-naitslimane/anaitslimane.article.bulogenda.git
    cd bulogenda
    ```
 
@@ -38,7 +38,7 @@ Before you begin, ensure you have the following installed on your system:
 
 4. **Loading Demo Data (Optional)**
 
-   If you want to explore the interface with a realistic sample dataset (contacts, opportunities across all Kanban stages, upcoming/past interviews, and interaction logs), start `bulogenda` once so it initializes `suivi.db`[cite: 21, 22], then run from the project root:
+   If you want to explore the interface with a realistic sample dataset (contacts, opportunities across all Kanban stages, upcoming/past interviews, and interaction logs), start `bulogenda` once so it initializes `suivi.db`, then run from the project root:
 
    ```bash
    sqlite3 suivi.db ".read demo.sql"
