@@ -1,4 +1,4 @@
-import { APPLIED, ACTIVE_OPP_STAGES, ROLE_COLORS, ICONS } from "./constants.js";
+import { APPLIED, ACTIVE_OPP_STAGES, CATEGORY_COLORS, ICONS } from "./constants.js";
 import { esc } from "./dom.js";
 import { today, fmtDateTime, daysFrom, ago, dueLabel } from "./date.js";
 import { t, trVal } from "./i18n.js";
@@ -31,7 +31,7 @@ function oppExtra(o) {
         (appts.length ? `<div class="rounds">${appts.map((a) => `<span class="${a.done ? "ok" : ""}">${a.done ? "✓" : "○"} ${esc(trVal("appointment", a.kind))}</span>`).join("")}</div>` : "") +
         (as.length
             ? `<div class="via c-meta">${esc(t("board.via"))} ${as
-                  .map((a) => `<span><i class="dot" style="background:${ROLE_COLORS[a.role] || "#6b7280"}"></i>${esc(a.name)}</span>`)
+                  .map((a) => `<span><i class="dot" style="background:${CATEGORY_COLORS[a.category] || "#6b7280"}"></i>${esc(a.name)}</span>`)
                   .join(", ")}</div>`
             : "") +
         (!ACTIVE_OPP_STAGES.includes(o.stage) && o.reason ? `<div class="c-reason">${esc(o.reason)}</div>` : "")
@@ -70,7 +70,7 @@ export function renderCard(o) {
     if (!isOpps) {
         const parts = [
             esc(o.position),
-            esc(trVal("role", o.role)),
+            esc(trVal("category", o.category)),
             esc(o.company),
             fmtLoc(o.location)
         ].filter(Boolean);

@@ -1,4 +1,4 @@
-import { STAGES, APPLIED, OPEN, CROLES, CONTRACTS, OPP_SOURCES } from "./constants.js";
+import { STAGES, APPLIED, OPEN, CATEGORIES, CONTRACTS, OPP_SOURCES } from "./constants.js";
 import { $ } from "./dom.js";
 import { nowLocalISO } from "./date.js";
 import { api } from "./http.js";
@@ -20,7 +20,7 @@ export function openNew(stage) {
         ["#nc-name", "#nc-position", "#nc-company", "#nc-location", "#nc-email", "#nc-phone", "#nc-link"].forEach((id) => {
             if ($(id)) $(id).value = "";
         });
-        $("#nc-role").value = CROLES[0];
+        $("#nc-category").value = CATEGORIES[0];
         $("#nc-stage").innerHTML = opts(STAGES.contacts, "stage");
         $("#nc-stage").value = stage || STAGES.contacts[0];
         $("#nc-dup").classList.add("hidden");
@@ -74,7 +74,7 @@ export function bindDialogEvents(onReload) {
 
         const body = {
             name,
-            role: $("#nc-role").value,
+            category: $("#nc-category").value,
             position: $("#nc-position").value.trim(),
             company: $("#nc-company").value.trim(),
             location: $("#nc-location").value.trim(),

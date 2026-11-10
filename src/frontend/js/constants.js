@@ -14,7 +14,7 @@ export const TITLE_FIELD = {
 };
 
 export const OPP_SOURCES = ["job_ad", "spontaneous", "inbound", "network"];
-export const CROLES = ["recruiter", "agency", "esn", "client", "network", "other"];
+export const CATEGORIES = ["end_client", "esn", "agency", "platform", "network", "other"];
 export const COMPANY_KINDS = ["end_client", "esn", "other"];
 export const CONTRACTS = ["", "freelance", "cdi", "portage", "other"];
 export const REMOTES = ["", "onsite", "hybrid", "remote"];
@@ -22,13 +22,10 @@ export const REMOTES = ["", "onsite", "hybrid", "remote"];
 export const APPOINTMENT_KINDS = ["discovery_call", "hr_interview", "tech_interview", "cto_interview", "tech_test", "team_fit", "client_interview", "other"];
 export const APPOINTMENT_MODES = ["phone", "video", "onsite"];
 
-export const IROLES = ["employee", "headhunter", "agency", "esn", "platform", "network", "other"];
-
-export const ROLE_COLORS = {
-    employee: "#0d9488",
-    headhunter: "#d97706",
-    agency: "#7c3aed",
+export const CATEGORY_COLORS = {
+    end_client: "#0d9488",
     esn: "#2563eb",
+    agency: "#7c3aed",
     platform: "#65a30d",
     network: "#db2777",
     other: "#6b7280",

@@ -1,4 +1,4 @@
-import { CROLES, COMPANY_KINDS, CONTRACTS, REMOTES, APPOINTMENT_KINDS, IROLES, OPP_SOURCES, APPOINTMENT_MODES } from "./constants.js";
+import { CATEGORIES, COMPANY_KINDS, CONTRACTS, REMOTES, APPOINTMENT_KINDS, OPP_SOURCES, APPOINTMENT_MODES } from "./constants.js";
 import { $, setOptions } from "./dom.js";
 import { today } from "./date.js";
 import { api } from "./http.js";
@@ -24,16 +24,16 @@ async function load() {
 }
 
 function populateSelects() {
-    setOptions("#c-role", opts(CROLES, "role"));
+    setOptions("#c-category", opts(CATEGORIES, "category"));
     setOptions("#o-source", opts(OPP_SOURCES, "source"));
     setOptions("#o-kind", opts(COMPANY_KINDS, "kind"));
     setOptions("#o-contract", opts(CONTRACTS, "contract"));
     setOptions("#o-remote", opts(REMOTES, "remote"));
     setOptions("#rd-kind", opts(APPOINTMENT_KINDS, "appointment"));
-    setOptions("#nc-role", opts(CROLES, "role"));
+    setOptions("#nc-category", opts(CATEGORIES, "category"));
     setOptions("#no-source", opts(OPP_SOURCES, "source"));
     setOptions("#no-contract", opts(CONTRACTS, "contract"));
-    setOptions("#ar", opts(IROLES, "role"));
+    setOptions("#ar", opts(CATEGORIES, "category"));
     setOptions("#rd-mode", opts(APPOINTMENT_MODES, "mode"));
     updateFilterDropdown();
 }

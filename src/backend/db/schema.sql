@@ -1,7 +1,7 @@
 CREATE TABLE IF NOT EXISTS contacts (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT NOT NULL,
-    role TEXT DEFAULT 'recruiter',
+    category TEXT DEFAULT 'end_client',
     position TEXT DEFAULT '',
     company TEXT DEFAULT '',
     location TEXT DEFAULT '',
@@ -47,7 +47,7 @@ CREATE TABLE IF NOT EXISTS actors (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     opp_id INTEGER NOT NULL,
     name TEXT NOT NULL,
-    role TEXT DEFAULT 'employee',
+    category TEXT DEFAULT 'end_client',
     contact TEXT DEFAULT '',
     email TEXT DEFAULT '',
     phone TEXT DEFAULT '',

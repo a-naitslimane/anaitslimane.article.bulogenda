@@ -1,4 +1,4 @@
-import { SCOPES, STAGES, CROLES, CONTRACTS, OPP_SOURCES } from "./constants.js";
+import { SCOPES, STAGES, CATEGORIES, CONTRACTS, OPP_SOURCES } from "./constants.js";
 import { $, esc } from "./dom.js";
 import { t, trVal, opts } from "./i18n.js";
 import { state, byOpp } from "./store.js";
@@ -10,7 +10,7 @@ export function updateFilterDropdown() {
     const currentVal = fr.value;
     fr.innerHTML = `<option value="">${esc(t("filter.all"))}</option>`;
     if (state.view === "contacts") {
-        fr.insertAdjacentHTML("beforeend", opts(CROLES, "role"));
+        fr.insertAdjacentHTML("beforeend", opts(CATEGORIES, "category"));
     } else {
         const srcOpts = OPP_SOURCES.map((s) => `<option value="source:${esc(s)}">${esc(trVal("source", s))}</option>`).join("");
         const contractOpts = CONTRACTS.filter(Boolean)
@@ -33,7 +33,7 @@ export function visible() {
         let matchesFilter = true;
         if (filterVal) {
             if (state.view === "contacts") {
-                matchesFilter = o.role === filterVal;
+                matchesFilter = o.category === filterVal;
             } else if (filterVal.startsWith("source:")) {
                 matchesFilter = (o.source || "job_ad") === filterVal.slice(7);
             } else if (filterVal.startsWith("contract:")) {

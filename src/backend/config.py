@@ -14,7 +14,7 @@ OPP_STAGES = ["applied", "in_progress", "won", "declined", "rejected"]
 
 CONTACT_FIELDS = [
     "name",
-    "role",
+    "category",
     "position",
     "company",
     "location",
@@ -45,7 +45,7 @@ OPP_FIELDS = [
     "notes",
 ]
 
-ACTOR_FIELDS = ["name", "role", "contact", "email", "phone", "link", "day"]
+ACTOR_FIELDS = ["name", "category", "contact", "email", "phone", "link", "day"]
 APPOINTMENT_FIELDS = [
     "day",
     "kind",
