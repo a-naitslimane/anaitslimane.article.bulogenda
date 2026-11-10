@@ -66,21 +66,27 @@ export function renderCard(o) {
 
     const isOpps = state.view === "opps";
 
-    let contactSubHtml = "";
+    let contactExtraHtml = "";
     if (!isOpps) {
-        const parts = [
-            esc(o.position),
-            esc(trVal("category", o.category)),
-            esc(o.company),
-            fmtLoc(o.location)
-        ].filter(Boolean);
-        contactSubHtml = `<div class="c-sub">${parts.join(" · ")}</div>`;
+        const catCol = CATEGORY_COLORS[o.category] || "#6b7280";
+        const tags = [];
+        if (o.company) {
+            tags.push(`<span class="c-tag tag-comp">${esc(o.company)}</span>`);
+        }
+        if (o.category) {
+            tags.push(`<span class="c-tag tag-cat"><i class="dot" style="background:${catCol}"></i>${esc(trVal("category", o.category))}</span>`);
+        }
+        if (o.location) {
+            tags.push(`<span class="c-tag tag-loc">${fmtLoc(o.location)}</span>`);
+        }
+        contactExtraHtml =
+            (o.position ? `<div class="c-pos">${esc(o.position)}</div>` : "") +
+            (tags.length ? `<div class="c-tags">${tags.join("")}</div>` : "");
     }
 
     return `<article draggable="true" data-id="${o.id}" class="${state.curScope === state.view && o.id === state.curId ? "sel " : ""}${closed ? "closed" : ""}">
     <strong class="c-title">${esc(titleOf(state.view, o))}</strong>
-    ${isOpps && o.position ? `<div class="c-pos">${esc(o.position)}</div>` : contactSubHtml}
-    ${isOpps ? oppExtra(o) : ""}
+    ${isOpps ? (o.position ? `<div class="c-pos">${esc(o.position)}</div>` : "") + oppExtra(o) : contactExtraHtml}
     ${due}
     ${dupBadge}
     ${footLines.length ? `<div class="c-foot">${footLines.join("")}</div>` : ""}

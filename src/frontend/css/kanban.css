@@ -225,3 +225,16 @@ article .c-reason {
     text-decoration-color: rgba(30, 58, 138, 0.45);
     text-underline-offset: 2px;
 }
+
+.tag-comp {
+    font-weight: 600;
+    color: #1e293b;
+    background: #f1f5f9;
+    border-color: #cbd5e1;
+}
+
+.tag-cat {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
