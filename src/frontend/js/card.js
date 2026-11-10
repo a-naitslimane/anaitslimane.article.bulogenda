@@ -68,7 +68,12 @@ export function renderCard(o) {
 
     let contactSubHtml = "";
     if (!isOpps) {
-        const parts = [esc(trVal("role", o.role)), esc(o.company), fmtLoc(o.location)].filter(Boolean);
+        const parts = [
+            esc(o.position),
+            esc(trVal("role", o.role)),
+            esc(o.company),
+            fmtLoc(o.location)
+        ].filter(Boolean);
         contactSubHtml = `<div class="c-sub">${parts.join(" · ")}</div>`;
     }
 

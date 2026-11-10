@@ -2,6 +2,7 @@ CREATE TABLE IF NOT EXISTS contacts (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT NOT NULL,
     role TEXT DEFAULT 'recruiter',
+    position TEXT DEFAULT '',
     company TEXT DEFAULT '',
     location TEXT DEFAULT '',
     email TEXT DEFAULT '',

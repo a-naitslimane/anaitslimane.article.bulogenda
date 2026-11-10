@@ -15,6 +15,7 @@ OPP_STAGES = ["applied", "in_progress", "won", "declined", "rejected"]
 CONTACT_FIELDS = [
     "name",
     "role",
+    "position",
     "company",
     "location",
     "email",

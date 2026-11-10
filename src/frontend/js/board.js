@@ -26,7 +26,7 @@ export function visible() {
     const filterVal = $("#fr").value;
     return state.data[state.view].filter((o) => {
         const text = {
-            contacts: [o.name, o.company, o.notes],
+            contacts: [o.name, o.position, o.company, o.location, o.notes],
             opps: [o.company, o.position, o.location, o.team, o.description, o.notes].concat(byOpp(o.id).map((a) => a.name)),
         }[state.view];
 
